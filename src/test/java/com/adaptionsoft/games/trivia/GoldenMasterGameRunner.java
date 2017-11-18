@@ -61,11 +61,13 @@ public class GoldenMasterGameRunner {
 
     }
 
-    private static File ensureDirectoryExists(final Path goldenMasterRoot) {
-        final File goldenMasterRootAsFile = goldenMasterRoot.toFile();
-        goldenMasterRootAsFile.mkdirs();
-        if (!goldenMasterRootAsFile.exists())
-            throw new RuntimeException(String.format("I couldn't create the golden master directory at path [%s]", goldenMasterRoot));
-        return goldenMasterRootAsFile;
+    // REFACTOR Move to generate File library. Doesn't Java I/O have this?!
+    private static File ensureDirectoryExists(final Path pathToDirectory) {
+        final File directoryThatMustExist = pathToDirectory.toFile();
+        directoryThatMustExist.mkdirs();
+        if (!directoryThatMustExist.exists())
+            throw new RuntimeException(String.format("I couldn't create the directory at path [%s]", pathToDirectory));
+
+        return directoryThatMustExist;
     }
 }
