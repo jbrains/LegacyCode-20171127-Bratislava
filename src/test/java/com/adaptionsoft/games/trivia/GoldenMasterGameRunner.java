@@ -1,6 +1,8 @@
 package com.adaptionsoft.games.trivia;
 
 import com.adaptionsoft.games.uglytrivia.Game;
+import io.vavr.control.Either;
+import io.vavr.control.Option;
 
 import java.io.File;
 import java.io.PrintStream;
@@ -21,8 +23,10 @@ public class GoldenMasterGameRunner {
         if (!fileSystem.isOpen())
             throw new RuntimeException("The golden master file system is not open.");
 
-        final File goldenMasterRootAsFile = ensureDirectoryExists(goldenMasterRoot);
-        final File goldenMasterRunRootAsFile = ensureDirectoryExists(goldenMasterRunRoot);
+        final File goldenMasterRootAsFile = ensureDirectoryExists(goldenMasterRoot).getOrElseThrow(
+                () -> new RuntimeException(String.format("I couldn't create the golden master directory at path [%s]", goldenMasterRoot)));
+        final File goldenMasterRunRootAsFile = ensureDirectoryExists(goldenMasterRunRoot).getOrElseThrow(
+                () -> new RuntimeException(String.format("I couldn't create the test run directory at path [%s]", goldenMasterRunRoot)));
 
         final long gameSeed = 812736L;
 
@@ -62,12 +66,10 @@ public class GoldenMasterGameRunner {
     }
 
     // REFACTOR Move to generate File library. Doesn't Java I/O have this?!
-    private static File ensureDirectoryExists(final Path pathToDirectory) {
+    private static Option<File> ensureDirectoryExists(final Path pathToDirectory) {
         final File directoryThatMustExist = pathToDirectory.toFile();
         directoryThatMustExist.mkdirs();
-        if (!directoryThatMustExist.exists())
-            throw new RuntimeException(String.format("I couldn't create the directory at path [%s]", pathToDirectory));
-
-        return directoryThatMustExist;
+        final boolean itExists = directoryThatMustExist.exists();
+        return itExists ? Option.of(directoryThatMustExist) : Option.none();
     }
 }
