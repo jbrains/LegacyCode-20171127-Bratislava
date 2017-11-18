@@ -25,7 +25,11 @@ public class GoldenMasterGameRunner {
         if (!goldenMasterRootAsFile.exists())
             throw new RuntimeException(String.format("I couldn't create the golden master directory at path [%s]", goldenMasterRoot));
 
-        System.setOut(new PrintStream(new File(goldenMasterRootAsFile, String.format("game-%d.txt", 812736L))));
+        final long gameSeed = 812736L;
+
+        final File goldenMasterFile = new File(goldenMasterRootAsFile, String.format("game-%d.txt", gameSeed));
+
+        System.setOut(new PrintStream(goldenMasterFile));
 
         Game aGame = new Game();
 
@@ -33,7 +37,7 @@ public class GoldenMasterGameRunner {
         aGame.add("Pat");
         aGame.add("Sue");
 
-        Random rand = new Random(812736L);
+        Random rand = new Random(gameSeed);
 
         do {
 
