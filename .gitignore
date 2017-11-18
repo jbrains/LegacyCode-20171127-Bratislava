@@ -1,0 +1,10 @@
+# Build output
+target
+build
+out
+
+# IDEA
+.idea
+
+# Reports
+Metrics
