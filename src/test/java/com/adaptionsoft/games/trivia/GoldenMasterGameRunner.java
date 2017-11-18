@@ -28,41 +28,42 @@ public class GoldenMasterGameRunner {
         final File goldenMasterRunRootAsFile = ensureDirectoryExists(goldenMasterRunRoot).getOrElseThrow(
                 () -> new RuntimeException(String.format("I couldn't create the test run directory at path [%s]", goldenMasterRunRoot)));
 
-        final long gameSeed = 812736L;
+        final long startingSeed = 812736L;
 
-        final String gameOutputFileName = String.format("game-%d.txt", gameSeed);
-        final File goldenMasterFile = new File(goldenMasterRootAsFile, gameOutputFileName);
+        for (long seed = startingSeed; seed < startingSeed + 1; seed++) {
+            final String gameOutputFileName = String.format("game-%d.txt", seed);
+            final File goldenMasterFile = new File(goldenMasterRootAsFile, gameOutputFileName);
 
-        final File gameOutputFile;
-        if (goldenMasterFile.exists()) {
-            gameOutputFile = new File(goldenMasterRunRootAsFile, gameOutputFileName);
-        } else {
-            gameOutputFile = goldenMasterFile;
-        }
-
-        System.setOut(new PrintStream(gameOutputFile));
-
-        Game aGame = new Game();
-
-        aGame.add("Chet");
-        aGame.add("Pat");
-        aGame.add("Sue");
-
-        Random rand = new Random(gameSeed);
-
-        do {
-
-            aGame.roll(rand.nextInt(5) + 1);
-
-            if (rand.nextInt(9) == 7) {
-                notAWinner = aGame.wrongAnswer();
+            final File gameOutputFile;
+            if (goldenMasterFile.exists()) {
+                gameOutputFile = new File(goldenMasterRunRootAsFile, gameOutputFileName);
             } else {
-                notAWinner = aGame.wasCorrectlyAnswered();
+                gameOutputFile = goldenMasterFile;
             }
 
+            System.setOut(new PrintStream(gameOutputFile));
 
-        } while (notAWinner);
+            Game aGame = new Game();
 
+            aGame.add("Chet");
+            aGame.add("Pat");
+            aGame.add("Sue");
+
+            Random rand = new Random(startingSeed);
+
+            do {
+
+                aGame.roll(rand.nextInt(5) + 1);
+
+                if (rand.nextInt(9) == 7) {
+                    notAWinner = aGame.wrongAnswer();
+                } else {
+                    notAWinner = aGame.wasCorrectlyAnswered();
+                }
+
+
+            } while (notAWinner);
+        }
     }
 
     // REFACTOR Move to generate File library. Doesn't Java I/O have this?!
