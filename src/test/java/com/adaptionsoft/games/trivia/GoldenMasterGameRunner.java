@@ -30,7 +30,8 @@ public class GoldenMasterGameRunner {
 
         final long startingSeed = 812736L;
 
-        for (long seed = startingSeed; seed < startingSeed + 1; seed++) {
+        for (long i = 0; i < 1; i++) {
+            final long seed = startingSeed + i;
             final String gameOutputFileName = String.format("game-%d.txt", seed);
             final File goldenMasterFile = new File(goldenMasterRootAsFile, gameOutputFileName);
 
