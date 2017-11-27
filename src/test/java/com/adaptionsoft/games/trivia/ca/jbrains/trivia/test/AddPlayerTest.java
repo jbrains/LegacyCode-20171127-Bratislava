@@ -54,8 +54,8 @@ public class AddPlayerTest {
 
     @Test
     public void addSixthPlayer() throws Exception {
-        class TestableGame extends Game {
-            public TestableGame() {
+        class SilentGameWithFivePlayers extends Game {
+            public SilentGameWithFivePlayers() {
                 List.of(1, 2, 3, 4, 5).map(n -> String.format("Player %d", n)).forEach(
                         this::addPlayerNamed
                 );
@@ -66,8 +66,7 @@ public class AddPlayerTest {
             }
         }
 
-        final TestableGame game = new TestableGame();
-
+        final SilentGameWithFivePlayers game = new SilentGameWithFivePlayers();
         try {
             game.addPlayerNamed("the player that exposes the bug");
             Assert.fail("Yay! We fixed bug JIRA-1721!");
