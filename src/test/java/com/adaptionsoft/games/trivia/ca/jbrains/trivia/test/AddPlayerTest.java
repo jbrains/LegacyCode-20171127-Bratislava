@@ -6,13 +6,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class AddPlayerTest {
-    public static class SilentGame extends Game {
-        @Override
-        protected void reportMessage(final String message) {
-            // Intentionally do nothing
-        }
-    }
-
     @Test
     public void firstPlayer() throws Exception {
         final SilentGame game = new SilentGame();
@@ -58,7 +51,14 @@ public class AddPlayerTest {
         try {
             game.addPlayerNamed("the player that exposes the bug");
             Assert.fail("Yay! We fixed bug JIRA-1721!");
+        } catch (ArrayIndexOutOfBoundsException currentBehavior) {
         }
-        catch (ArrayIndexOutOfBoundsException currentBehavior) {}
+    }
+
+    public static class SilentGame extends Game {
+        @Override
+        protected void reportMessage(final String message) {
+            // Intentionally do nothing
+        }
     }
 }
