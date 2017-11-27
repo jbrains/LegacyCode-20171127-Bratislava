@@ -12,9 +12,10 @@ public class GoldenMasterGameRunner {
     public static void main(String[] args) throws Exception {
         long seed = -1L;
 
-        if (args.length > 1) {
-            seed = Long.parseLong(args[1]);
+        if (args.length > 0) {
+            seed = Long.parseLong(args[0]);
         }
+        System.out.println(String.format("Seed: %ld", seed));
 
         Game aGame = new Game();
 
