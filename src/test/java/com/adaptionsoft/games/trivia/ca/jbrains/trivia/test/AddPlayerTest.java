@@ -54,7 +54,14 @@ public class AddPlayerTest {
 
     @Test
     public void addSixthPlayer() throws Exception {
-        class SilentGameWithFivePlayers extends Game {
+        class SilentGame extends Game {
+            @Override
+            protected void reportMessage(final String message) {
+                // Intentionally do nothing
+            }
+        }
+
+        class SilentGameWithFivePlayers extends SilentGame {
             public SilentGameWithFivePlayers() {
                 List.of(1, 2, 3, 4, 5).map(n -> String.format("Player %d", n)).forEach(
                         this::addPlayerNamed
