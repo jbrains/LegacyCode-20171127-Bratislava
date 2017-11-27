@@ -17,4 +17,15 @@ public class AddPlayerTest {
         Assert.assertEquals(1, game.howManyPlayers());
         Assert.assertFalse(game.isPlayable());
     }
+
+    @Test
+    public void emptyName() throws Exception {
+        final Game game = new Game() {
+            @Override
+            protected void reportMessage(final String message) {
+                // Intentionally do nothing
+            }
+        };
+        game.addPlayerNamed("");
+    }
 }
