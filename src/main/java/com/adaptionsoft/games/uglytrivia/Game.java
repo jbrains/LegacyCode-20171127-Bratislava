@@ -34,9 +34,14 @@ public class Game {
         return (howManyPlayers() >= 2);
     }
 
+    /**
+     * @deprecated Scheduled to disappear on 2018-04-30
+     */
     public boolean add(String playerName) {
+        return addPlayerNamed(playerName);
+    }
 
-
+    private boolean addPlayerNamed(final String playerName) {
         players.add(playerName);
         places[howManyPlayers()] = 0;
         purses[howManyPlayers()] = 0;
