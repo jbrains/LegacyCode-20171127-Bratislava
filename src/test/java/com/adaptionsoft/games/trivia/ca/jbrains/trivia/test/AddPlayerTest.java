@@ -34,12 +34,15 @@ public class AddPlayerTest {
     @Test
     public void twoPlayersWithTheSameName() throws Exception {
         final Game game = new Game() {
+            {
+                addPlayerNamed("player with the same name");
+            }
+
             @Override
             protected void reportMessage(final String message) {
                 // Intentionally do nothing
             }
         };
-        game.addPlayerNamed("player with the same name");
         game.addPlayerNamed("player with the same name");
 
         // Surprisingly, this is OK! No exception.
