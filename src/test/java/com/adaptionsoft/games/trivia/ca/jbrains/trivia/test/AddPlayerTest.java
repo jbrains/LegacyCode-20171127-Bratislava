@@ -13,7 +13,7 @@ public class AddPlayerTest {
                 // Intentionally do nothing
             }
         };
-        game.add("Player 1");
+        game.addPlayerNamed("Player 1");
         Assert.assertEquals(1, game.howManyPlayers());
         Assert.assertFalse(game.isPlayable());
     }
