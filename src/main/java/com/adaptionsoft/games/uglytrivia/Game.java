@@ -42,9 +42,8 @@ public class Game {
     }
 
     public boolean addPlayerNamed(final String playerName) {
-        // SMELL These lines of code now depend on each other for sequence!
-        initializePlayerNamed(playerName);
-        reportPlayerAddedInPosition(playerName, players.size());
+        final int positionOfNewPlayer = initializePlayerNamed(playerName);
+        reportPlayerAddedInPosition(playerName, positionOfNewPlayer);
         return true;
     }
 
@@ -61,12 +60,13 @@ public class Game {
         reportMessage(playerName + " was added");
     }
 
-    public void initializePlayerNamed(final String playerName) {
+    public int initializePlayerNamed(final String playerName) {
         // REFACTOR Introduce a Player struct here
         players.add(playerName);
         places[howManyPlayers()] = 0;
         purses[howManyPlayers()] = 0;
         inPenaltyBox[howManyPlayers()] = false;
+        return players.size();
     }
 
     protected void reportMessage(final String message) {
