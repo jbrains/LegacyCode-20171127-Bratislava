@@ -43,7 +43,7 @@ public class Game {
         inPenaltyBox[howManyPlayers()] = false;
 
         reportMessage(playerName + " was added");
-        System.out.println("They are player number " + players.size());
+        reportMessage("They are player number " + players.size());
         return true;
     }
 
