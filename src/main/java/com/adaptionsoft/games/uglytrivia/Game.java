@@ -42,15 +42,26 @@ public class Game {
     }
 
     public boolean addPlayerNamed(final String playerName) {
+        initializePlayerNamed(playerName);
+        reportPlayerAdded(playerName);
+        reportPlayerNumber(players.size());
+        return true;
+    }
+
+    private void reportPlayerNumber(final int playerNumber) {
+        reportMessage("They are player number " + playerNumber);
+    }
+
+    private void reportPlayerAdded(final String playerName) {
+        reportMessage(playerName + " was added");
+    }
+
+    public void initializePlayerNamed(final String playerName) {
         // REFACTOR Introduce a Player struct here
         players.add(playerName);
         places[howManyPlayers()] = 0;
         purses[howManyPlayers()] = 0;
         inPenaltyBox[howManyPlayers()] = false;
-
-        reportMessage(playerName + " was added");
-        reportMessage("They are player number " + players.size());
-        return true;
     }
 
     protected void reportMessage(final String message) {
