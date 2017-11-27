@@ -33,6 +33,8 @@ public class AddPlayerTest {
 
     @Test
     public void twoPlayersWithTheSameName() throws Exception {
+        // REFACTOR I'd like to create a Game with some players
+        // already "playing".
         final Game game = new Game() {
             {
                 addPlayerNamed("player with the same name");
