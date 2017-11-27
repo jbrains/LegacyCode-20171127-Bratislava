@@ -47,7 +47,7 @@ public class Game {
         return true;
     }
 
-    private void reportMessage(final String message) {
+    protected void reportMessage(final String message) {
         System.out.println(message);
     }
 
