@@ -42,10 +42,15 @@ public class Game {
     }
 
     public boolean addPlayerNamed(final String playerName) {
+        // SMELL These lines of code now depend on each other for sequence!
         initializePlayerNamed(playerName);
-        reportPlayerAdded(playerName);
-        reportPlayerNumber(players.size());
+        reportPlayerAddedInPosition(playerName, players.size());
         return true;
+    }
+
+    private void reportPlayerAddedInPosition(final String playerName, final int position) {
+        reportPlayerAdded(playerName);
+        reportPlayerNumber(position);
     }
 
     private void reportPlayerNumber(final int playerNumber) {
