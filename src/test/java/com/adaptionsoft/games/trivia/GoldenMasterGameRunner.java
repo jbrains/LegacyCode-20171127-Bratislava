@@ -1,7 +1,6 @@
 package com.adaptionsoft.games.trivia;
 
 import com.adaptionsoft.games.uglytrivia.Game;
-import io.vavr.control.Either;
 import io.vavr.control.Option;
 
 import java.io.File;
