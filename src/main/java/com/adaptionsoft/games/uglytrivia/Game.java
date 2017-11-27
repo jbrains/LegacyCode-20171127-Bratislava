@@ -42,6 +42,7 @@ public class Game {
     }
 
     public boolean addPlayerNamed(final String playerName) {
+        // REFACTOR Introduce a Player struct here
         players.add(playerName);
         places[howManyPlayers()] = 0;
         purses[howManyPlayers()] = 0;
