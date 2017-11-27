@@ -6,14 +6,16 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class AddPlayerTest {
+    public static class SilentGame extends Game {
+        @Override
+        protected void reportMessage(final String message) {
+            // Intentionally do nothing
+        }
+    }
+
     @Test
     public void firstPlayer() throws Exception {
-        final Game game = new Game() {
-            @Override
-            protected void reportMessage(final String message) {
-                // Intentionally do nothing
-            }
-        };
+        final SilentGame game = new SilentGame();
         game.addPlayerNamed("Player 1");
         Assert.assertEquals(1, game.howManyPlayers());
         Assert.assertFalse(game.isPlayable());
@@ -21,12 +23,7 @@ public class AddPlayerTest {
 
     @Test
     public void emptyName() throws Exception {
-        final Game game = new Game() {
-            @Override
-            protected void reportMessage(final String message) {
-                // Intentionally do nothing
-            }
-        };
+        final SilentGame game = new SilentGame();
         game.addPlayerNamed("");
 
         // Surprisingly, this is OK! No exception.
@@ -36,14 +33,9 @@ public class AddPlayerTest {
     public void twoPlayersWithTheSameName() throws Exception {
         // REFACTOR I'd like to create a Game with some players
         // already "playing".
-        final Game game = new Game() {
+        final SilentGame game = new SilentGame() {
             {
                 addPlayerNamed("player with the same name");
-            }
-
-            @Override
-            protected void reportMessage(final String message) {
-                // Intentionally do nothing
             }
         };
         game.addPlayerNamed("player with the same name");
@@ -54,22 +46,11 @@ public class AddPlayerTest {
 
     @Test
     public void addSixthPlayer() throws Exception {
-        class SilentGame extends Game {
-            @Override
-            protected void reportMessage(final String message) {
-                // Intentionally do nothing
-            }
-        }
-
         class SilentGameWithFivePlayers extends SilentGame {
             public SilentGameWithFivePlayers() {
                 List.of(1, 2, 3, 4, 5).map(n -> String.format("Player %d", n)).forEach(
                         this::addPlayerNamed
                 );
-            }
-            @Override
-            protected void reportMessage(final String message) {
-                // Intentionally do nothing
             }
         }
 
