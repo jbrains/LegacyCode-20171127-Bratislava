@@ -27,5 +27,22 @@ public class AddPlayerTest {
             }
         };
         game.addPlayerNamed("");
+
+        // Surprisingly, this is OK! No exception.
+    }
+
+    @Test
+    public void twoPlayersWithTheSameName() throws Exception {
+        final Game game = new Game() {
+            @Override
+            protected void reportMessage(final String message) {
+                // Intentionally do nothing
+            }
+        };
+        game.addPlayerNamed("player with the same name");
+        game.addPlayerNamed("player with the same name");
+
+        // Surprisingly, this is OK! No exception.
+        Assert.assertEquals(2, game.howManyPlayers());
     }
 }
