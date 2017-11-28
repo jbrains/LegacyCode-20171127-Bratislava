@@ -3,6 +3,9 @@ target
 build
 out
 
+### Gradle
+.gradle
+
 ### IDEA
 # User-specific stuff:
 .idea/**/workspace.xml

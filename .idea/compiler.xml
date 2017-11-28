@@ -22,6 +22,10 @@
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
       <module name="trivia-java" target="1.8" />
+      <module name="trivia-java_main" target="1.8" />
+      <module name="trivia-java_test" target="1.8" />
+      <module name="uglytrivia_main" target="1.8" />
+      <module name="uglytrivia_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
