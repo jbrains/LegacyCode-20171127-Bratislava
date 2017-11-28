@@ -44,8 +44,8 @@ public class Game {
 
         for (int i = 0; i < 50; i++) {
             popQuestions.addLast("Pop Question " + i);
-            scienceQuestions.addLast(("Science Question " + i));
-            sportsQuestions.addLast(("Sports Question " + i));
+            scienceQuestions.addLast("Science Question " + i);
+            sportsQuestions.addLast("Sports Question " + i);
             rockQuestions.addLast(createRockQuestionAtIndex(i));
         }
 
