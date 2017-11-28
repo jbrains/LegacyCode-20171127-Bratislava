@@ -36,10 +36,10 @@ public class Game {
         return ts.removeFirst();
     }
 
-    public static String chooseNextQuestionInCategory(final String currentCategory, final Map<String, LinkedList<String>> questionDecksByCategory) {
-        return questionDecksByCategory.get(currentCategory)
+    public static String chooseNextQuestionInCategory(final String categoryName, final Map<String, LinkedList<String>> questionDecksByCategory) {
+        return questionDecksByCategory.get(categoryName)
                 .map(Game::chooseThenConsumeTheFirstItem)
-                .getOrElseThrow(unrecognizedCategoryNamed(currentCategory));
+                .getOrElseThrow(unrecognizedCategoryNamed(categoryName));
     }
 
     private static Supplier<RuntimeException> unrecognizedCategoryNamed(final String currentCategory) {
