@@ -41,7 +41,7 @@ public class Game {
             return sportsQuestions.removeFirst();
         if (currentCategory == "Rock")
             return rockQuestions.removeFirst();
-        
+
         throw new IllegalStateException(String.format(
                 "I don't know how to ask a question in category '%s', because I don't recognize that category name.",
                 currentCategory
