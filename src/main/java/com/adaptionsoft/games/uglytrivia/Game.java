@@ -126,15 +126,19 @@ public class Game {
 
 
     private String currentCategory() {
-        if (places[currentPlayer] == 0) return "Pop";
-        if (places[currentPlayer] == 4) return "Pop";
-        if (places[currentPlayer] == 8) return "Pop";
-        if (places[currentPlayer] == 1) return "Science";
-        if (places[currentPlayer] == 5) return "Science";
-        if (places[currentPlayer] == 9) return "Science";
-        if (places[currentPlayer] == 2) return "Sports";
-        if (places[currentPlayer] == 6) return "Sports";
-        if (places[currentPlayer] == 10) return "Sports";
+        return findCategoryByPlace(places[currentPlayer]);
+    }
+    
+    private String findCategoryByPlace(int place) {
+        if (place == 0) return "Pop";
+        if (place == 4) return "Pop";
+        if (place == 8) return "Pop";
+        if (place == 1) return "Science";
+        if (place == 5) return "Science";
+        if (place == 9) return "Science";
+        if (place == 2) return "Sports";
+        if (place == 6) return "Sports";
+        if (place == 10) return "Sports";
         return "Rock";
     }
 
