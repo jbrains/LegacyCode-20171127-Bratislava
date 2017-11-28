@@ -128,7 +128,8 @@ public class Game {
     private String currentCategory() {
         return findCategoryByPlace(places[currentPlayer]);
     }
-    
+
+    // REFACTOR This relates only to the Board, so maybe a Board class?
     public String findCategoryByPlace(int place) {
         if (place == 0) return "Pop";
         if (place == 4) return "Pop";
