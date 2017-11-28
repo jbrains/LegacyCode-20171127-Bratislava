@@ -1,6 +1,7 @@
 package com.adaptionsoft.games.uglytrivia;
 
 import io.vavr.collection.HashMap;
+import io.vavr.collection.Map;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -26,20 +27,6 @@ public class Game {
             sportsQuestions.addLast(("Sports Question " + i));
             rockQuestions.addLast(createRockQuestion(i));
         }
-    }
-
-    public static String chooseNextQuestionInCategory(
-            String currentCategory,
-            LinkedList<String> popQuestions,
-            LinkedList<String> scienceQuestions,
-            LinkedList<String> sportsQuestions,
-            LinkedList<String> rockQuestions) {
-
-        return chooseNextQuestionInCategory(currentCategory, HashMap.of("Pop", popQuestions,
-                "Science", scienceQuestions,
-                "Sports", sportsQuestions,
-                "Rock", rockQuestions
-        ));
     }
 
     public String createRockQuestion(int index) {
@@ -143,7 +130,7 @@ public class Game {
         }
     }
 
-    private static String chooseNextQuestionInCategory(final String currentCategory, final HashMap<String, LinkedList<String>> questionDecksByCategory) {
+    public static String chooseNextQuestionInCategory(final String currentCategory, final Map<String, LinkedList<String>> questionDecksByCategory) {
         if (currentCategory == "Pop")
             return questionDecksByCategory.get(currentCategory).map(LinkedList::removeFirst).getOrElseThrow(() -> new IllegalStateException(String.format(
                     "I don't know how to ask a question in category '%s', because I don't recognize that category name.",
