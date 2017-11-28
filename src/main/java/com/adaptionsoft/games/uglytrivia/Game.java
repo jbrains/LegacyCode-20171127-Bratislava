@@ -26,7 +26,7 @@ public class Game {
         }
     }
 
-    public static String askQuestionPure(
+    public static String chooseNextQuestionInCategory(
             String currentCategory,
             LinkedList<String> popQuestions,
             LinkedList<String> scienceQuestions,
