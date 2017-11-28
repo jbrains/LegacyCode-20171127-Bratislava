@@ -15,7 +15,7 @@ public class GoldenMasterGameRunner {
         if (args.length > 0) {
             seed = Long.parseLong(args[0]);
         }
-        System.out.println(String.format("Seed: %ld", seed));
+        System.out.println(String.format("Seed: %d", seed));
 
         Game aGame = new Game();
 
