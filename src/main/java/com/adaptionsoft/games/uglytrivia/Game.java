@@ -82,6 +82,7 @@ public class Game {
         return createRockQuestionAtIndex(index);
     }
 
+    // REFACTOR Inline me; I'm only here to support createRockQuestion(index)
     private static String createRockQuestionAtIndex(final int index) {
         return "Rock Question " + index;
     }
