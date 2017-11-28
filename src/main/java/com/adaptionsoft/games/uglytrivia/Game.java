@@ -129,7 +129,7 @@ public class Game {
         return findCategoryByPlace(places[currentPlayer]);
     }
     
-    private String findCategoryByPlace(int place) {
+    public String findCategoryByPlace(int place) {
         if (place == 0) return "Pop";
         if (place == 4) return "Pop";
         if (place == 8) return "Pop";

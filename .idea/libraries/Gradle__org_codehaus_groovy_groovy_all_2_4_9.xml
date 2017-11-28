@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: org.codehaus.groovy:groovy-all:2.4.9">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/Could not resolve org.codehaus.groovy:groovy-all:2.4.9." />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.groovy/groovy-all/2.4.9/3334e99a8baae12d6e014d444149e337ceb99a00/groovy-all-2.4.9.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
