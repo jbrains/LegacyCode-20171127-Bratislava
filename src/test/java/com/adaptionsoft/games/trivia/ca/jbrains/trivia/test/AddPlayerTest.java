@@ -2,10 +2,17 @@ package com.adaptionsoft.games.trivia.ca.jbrains.trivia.test;
 
 import com.adaptionsoft.games.uglytrivia.Game;
 import io.vavr.collection.List;
+import net.ttsui.junit.rules.pending.PendingImplementation;
+import net.ttsui.junit.rules.pending.PendingRule;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.MethodRule;
 
 public class AddPlayerTest {
+    @Rule
+    public MethodRule pendingRule = new PendingRule();
+
     @Test
     public void firstPlayer() throws Exception {
         final SilentGame game = new SilentGame();
@@ -38,6 +45,7 @@ public class AddPlayerTest {
     }
 
     @Test
+    @PendingImplementation("Waiting to fix bug JIRA-1721.")
     public void addSixthPlayer() throws Exception {
         class SilentGameWithFivePlayers extends SilentGame {
             public SilentGameWithFivePlayers() {
@@ -48,11 +56,7 @@ public class AddPlayerTest {
         }
 
         final SilentGameWithFivePlayers game = new SilentGameWithFivePlayers();
-        try {
-            game.addPlayerNamed("the player that exposes the bug");
-            Assert.fail("Yay! We fixed bug JIRA-1721!");
-        } catch (ArrayIndexOutOfBoundsException currentBehavior) {
-        }
+        game.addPlayerNamed("the player that exposes the bug");
     }
 
     public static class SilentGame extends Game {

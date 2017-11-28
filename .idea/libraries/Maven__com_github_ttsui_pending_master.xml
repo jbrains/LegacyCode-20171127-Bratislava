@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.github.ttsui:pending:master">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/ttsui/pending/master/pending-master.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/ttsui/pending/master/pending-master-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/ttsui/pending/master/pending-master-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
