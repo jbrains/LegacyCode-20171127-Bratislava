@@ -9,14 +9,19 @@ import java.util.function.Supplier;
 
 public class Game {
     private final Map<String, LinkedList<String>> questionDecksByCategory;
+    
     ArrayList players = new ArrayList();
     int[] places = new int[6];
     int[] purses = new int[6];
     boolean[] inPenaltyBox = new boolean[6];
 
+    /** @deprecated Scheduled for removal 2018-04-30 */
     LinkedList popQuestions = new LinkedList();
+    /** @deprecated Scheduled for removal 2018-04-30 */
     LinkedList scienceQuestions = new LinkedList();
+    /** @deprecated Scheduled for removal 2018-04-30 */
     LinkedList sportsQuestions = new LinkedList();
+    /** @deprecated Scheduled for removal 2018-04-30 */
     LinkedList rockQuestions = new LinkedList();
 
     int currentPlayer = 0;
