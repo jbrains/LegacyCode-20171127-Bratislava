@@ -5,6 +5,7 @@ import io.vavr.collection.Map;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.function.Supplier;
 
 public class Game {
     ArrayList players = new ArrayList();
@@ -27,6 +28,25 @@ public class Game {
             sportsQuestions.addLast(("Sports Question " + i));
             rockQuestions.addLast(createRockQuestion(i));
         }
+    }
+
+    // SMELL Generic, but still somehow strongly related to just this use.
+    // I'm not convinced that it belongs in a generic library.
+    private static <T> T chooseThenConsumeTheFirstItem(LinkedList<T> ts) {
+        return ts.removeFirst();
+    }
+
+    public static String chooseNextQuestionInCategory(final String currentCategory, final Map<String, LinkedList<String>> questionDecksByCategory) {
+        return questionDecksByCategory.get(currentCategory)
+                .map(Game::chooseThenConsumeTheFirstItem)
+                .getOrElseThrow(unrecognizedCategoryNamed(currentCategory));
+    }
+
+    private static Supplier<RuntimeException> unrecognizedCategoryNamed(final String currentCategory) {
+        return () -> new IllegalStateException(String.format(
+                "I don't know how to ask a question in category '%s', because I don't recognize that category name.",
+                currentCategory
+        ));
     }
 
     public String createRockQuestion(int index) {
@@ -128,35 +148,6 @@ public class Game {
                             )));
         } catch (IllegalStateException intentionallyDoNothingJustAsWeDidBefore) {
         }
-    }
-
-    public static String chooseNextQuestionInCategory(final String currentCategory, final Map<String, LinkedList<String>> questionDecksByCategory) {
-        if (currentCategory == "Pop")
-            return questionDecksByCategory.get(currentCategory).map(LinkedList::removeFirst).getOrElseThrow(() -> new IllegalStateException(String.format(
-                    "I don't know how to ask a question in category '%s', because I don't recognize that category name.",
-                    currentCategory
-            )));
-        if (currentCategory == "Science")
-            return questionDecksByCategory.get(currentCategory).map(LinkedList::removeFirst).getOrElseThrow(() -> new IllegalStateException(String.format(
-                    "I don't know how to ask a question in category '%s', because I don't recognize that category name.",
-                    currentCategory
-            )));
-        if (currentCategory == "Sports")
-            return questionDecksByCategory.get(currentCategory).map(LinkedList::removeFirst).getOrElseThrow(() -> new IllegalStateException(String.format(
-                    "I don't know how to ask a question in category '%s', because I don't recognize that category name.",
-                    currentCategory
-            )));
-        if (currentCategory == "Rock")
-            return questionDecksByCategory.get(currentCategory).map(LinkedList::removeFirst).getOrElseThrow(() -> new IllegalStateException(String.format(
-                    "I don't know how to ask a question in category '%s', because I don't recognize that category name.",
-                    currentCategory
-            )));
-
-        throw new IllegalStateException(String.format(
-                "I don't know how to ask a question in category '%s', because I don't recognize that category name.",
-                currentCategory
-        ));
-
     }
 
     private String currentCategory() {
