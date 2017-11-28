@@ -1,5 +1,7 @@
 package com.adaptionsoft.games.uglytrivia;
 
+import io.vavr.collection.HashMap;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -33,18 +35,10 @@ public class Game {
             LinkedList<String> sportsQuestions,
             LinkedList<String> rockQuestions) {
 
-        if (currentCategory == "Pop")
-            return popQuestions.removeFirst();
-        if (currentCategory == "Science")
-            return scienceQuestions.removeFirst();
-        if (currentCategory == "Sports")
-            return sportsQuestions.removeFirst();
-        if (currentCategory == "Rock")
-            return rockQuestions.removeFirst();
-
-        throw new IllegalStateException(String.format(
-                "I don't know how to ask a question in category '%s', because I don't recognize that category name.",
-                currentCategory
+        return chooseNextQuestionInCategory(currentCategory, HashMap.of("Pop", popQuestions,
+                "Science", scienceQuestions,
+                "Sports", sportsQuestions,
+                "Rock", rockQuestions
         ));
     }
 
@@ -140,12 +134,42 @@ public class Game {
             System.out.println(
                     chooseNextQuestionInCategory(
                             currentCategory(),
-                            popQuestions,
-                            scienceQuestions,
-                            sportsQuestions,
-                            rockQuestions));
+                            HashMap.of("Pop", popQuestions,
+                                    "Science", scienceQuestions,
+                                    "Sports", sportsQuestions,
+                                    "Rock", rockQuestions
+                            )));
         } catch (IllegalStateException intentionallyDoNothingJustAsWeDidBefore) {
         }
+    }
+
+    private static String chooseNextQuestionInCategory(final String currentCategory, final HashMap<String, LinkedList<String>> questionDecksByCategory) {
+        if (currentCategory == "Pop")
+            return questionDecksByCategory.get(currentCategory).map(LinkedList::removeFirst).getOrElseThrow(() -> new IllegalStateException(String.format(
+                    "I don't know how to ask a question in category '%s', because I don't recognize that category name.",
+                    currentCategory
+            )));
+        if (currentCategory == "Science")
+            return questionDecksByCategory.get(currentCategory).map(LinkedList::removeFirst).getOrElseThrow(() -> new IllegalStateException(String.format(
+                    "I don't know how to ask a question in category '%s', because I don't recognize that category name.",
+                    currentCategory
+            )));
+        if (currentCategory == "Sports")
+            return questionDecksByCategory.get(currentCategory).map(LinkedList::removeFirst).getOrElseThrow(() -> new IllegalStateException(String.format(
+                    "I don't know how to ask a question in category '%s', because I don't recognize that category name.",
+                    currentCategory
+            )));
+        if (currentCategory == "Rock")
+            return questionDecksByCategory.get(currentCategory).map(LinkedList::removeFirst).getOrElseThrow(() -> new IllegalStateException(String.format(
+                    "I don't know how to ask a question in category '%s', because I don't recognize that category name.",
+                    currentCategory
+            )));
+
+        throw new IllegalStateException(String.format(
+                "I don't know how to ask a question in category '%s', because I don't recognize that category name.",
+                currentCategory
+        ));
+
     }
 
     private String currentCategory() {
