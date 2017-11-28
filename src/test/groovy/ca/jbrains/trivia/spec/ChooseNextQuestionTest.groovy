@@ -29,4 +29,13 @@ class ChooseNextQuestionTest extends Specification {
         "Rock"    | fakeNextQuestionIn("Rock")
     }
 
+    def "reject unknown category"() {
+        expect:
+        try {
+            Game.chooseNextQuestionInCategory("::unknown category::",
+                    new LinkedList<String>(), new LinkedList<String>(), new LinkedList<String>(), new LinkedList<String>())
+            fail("How did you ask a question in an unknown category?!");
+        }
+        catch (IllegalStateException currentBehavior) {}
+    }
 }
