@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.function.Supplier;
 
 public class Game {
+    private final Map<String, LinkedList<String>> questionDecksByCategory;
     ArrayList players = new ArrayList();
     int[] places = new int[6];
     int[] purses = new int[6];
@@ -22,12 +23,37 @@ public class Game {
     boolean isGettingOutOfPenaltyBox;
 
     public Game() {
+        this(createQuestionDecks());
+    }
+
+    public Game(Map<String, LinkedList<String>> questionDecksByCategory) {
+        this.questionDecksByCategory = questionDecksByCategory;
+
+        // We have to support this legacy behavior until we can remove it
+        this.popQuestions = questionDecksByCategory.get("Pop").get();
+        this.scienceQuestions = questionDecksByCategory.get("Science").get();
+        this.sportsQuestions = questionDecksByCategory.get("Sports").get();
+        this.rockQuestions = questionDecksByCategory.get("Rock").get();
+    }
+
+    private static Map<String, LinkedList<String>> createQuestionDecks() {
+        LinkedList<String> popQuestions = new LinkedList<>();
+        LinkedList<String> scienceQuestions = new LinkedList<>();
+        LinkedList<String> sportsQuestions = new LinkedList<>();
+        LinkedList<String> rockQuestions = new LinkedList<>();
+
         for (int i = 0; i < 50; i++) {
             popQuestions.addLast("Pop Question " + i);
             scienceQuestions.addLast(("Science Question " + i));
             sportsQuestions.addLast(("Sports Question " + i));
-            rockQuestions.addLast(createRockQuestion(i));
+            rockQuestions.addLast(createRockQuestionAtIndex(i));
         }
+
+        return HashMap.of("Pop", popQuestions,
+                "Science", scienceQuestions,
+                "Sports", sportsQuestions,
+                "Rock", rockQuestions
+        );
     }
 
     // SMELL Generic, but still somehow strongly related to just this use.
@@ -49,7 +75,14 @@ public class Game {
         ));
     }
 
+    /**
+     * @deprecated Scheduled to be removed on 2018-04-30
+     */
     public String createRockQuestion(int index) {
+        return createRockQuestionAtIndex(index);
+    }
+
+    private static String createRockQuestionAtIndex(final int index) {
         return "Rock Question " + index;
     }
 
@@ -141,11 +174,7 @@ public class Game {
             System.out.println(
                     chooseNextQuestionInCategory(
                             currentCategory(),
-                            HashMap.of("Pop", popQuestions,
-                                    "Science", scienceQuestions,
-                                    "Sports", sportsQuestions,
-                                    "Rock", rockQuestions
-                            )));
+                            questionDecksByCategory));
         } catch (IllegalStateException intentionallyDoNothingJustAsWeDidBefore) {
         }
     }
