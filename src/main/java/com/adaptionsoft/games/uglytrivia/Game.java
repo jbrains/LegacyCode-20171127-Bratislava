@@ -2,7 +2,6 @@ package com.adaptionsoft.games.uglytrivia;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.function.Consumer;
 
 public class Game {
     ArrayList players = new ArrayList();
@@ -25,6 +24,28 @@ public class Game {
             sportsQuestions.addLast(("Sports Question " + i));
             rockQuestions.addLast(createRockQuestion(i));
         }
+    }
+
+    public static String askQuestionPure(
+            String currentCategory,
+            LinkedList<String> popQuestions,
+            LinkedList<String> scienceQuestions,
+            LinkedList<String> sportsQuestions,
+            LinkedList<String> rockQuestions) {
+
+        if (currentCategory == "Pop")
+            return popQuestions.removeFirst();
+        if (currentCategory == "Science")
+            return scienceQuestions.removeFirst();
+        if (currentCategory == "Sports")
+            return sportsQuestions.removeFirst();
+        if (currentCategory == "Rock")
+            return rockQuestions.removeFirst();
+        
+        throw new IllegalStateException(String.format(
+                "I don't know how to ask a question in category '%s', because I don't recognize that category name.",
+                currentCategory
+        ));
     }
 
     public String createRockQuestion(int index) {
@@ -124,25 +145,6 @@ public class Game {
         if (currentCategory() == "Rock")
             System.out.println(rockQuestions.removeFirst());
     }
-
-    public static void askQuestionPure(
-            String currentCategory,
-            LinkedList<String> popQuestions,
-            LinkedList<String> scienceQuestions,
-            LinkedList<String> sportsQuestions,
-            LinkedList<String> rockQuestions,
-            Consumer<Object> displayQuestion) {
-
-        if (currentCategory == "Pop")
-            displayQuestion.accept(popQuestions.removeFirst());
-        if (currentCategory == "Science")
-            displayQuestion.accept(scienceQuestions.removeFirst());
-        if (currentCategory == "Sports")
-            displayQuestion.accept(sportsQuestions.removeFirst());
-        if (currentCategory == "Rock")
-            displayQuestion.accept(rockQuestions.removeFirst());
-    }
-
 
     private String currentCategory() {
         return findCategoryByPlace(places[currentPlayer]);
