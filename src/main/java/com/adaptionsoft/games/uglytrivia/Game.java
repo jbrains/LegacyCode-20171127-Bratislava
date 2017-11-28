@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 
 public class Game {
     private final Map<String, LinkedList<String>> questionDecksByCategory;
-    
+
     ArrayList players = new ArrayList();
     int[] places = new int[6];
     int[] purses = new int[6];
