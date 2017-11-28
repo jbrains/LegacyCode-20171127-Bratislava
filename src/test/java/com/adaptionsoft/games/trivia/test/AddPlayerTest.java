@@ -1,4 +1,4 @@
-package com.adaptionsoft.games.trivia.ca.jbrains.trivia.test;
+package com.adaptionsoft.games.trivia.test;
 
 import com.adaptionsoft.games.uglytrivia.Game;
 import io.vavr.collection.List;
