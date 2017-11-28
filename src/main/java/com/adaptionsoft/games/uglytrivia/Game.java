@@ -2,6 +2,7 @@ package com.adaptionsoft.games.uglytrivia;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.function.Consumer;
 
 public class Game {
     ArrayList players = new ArrayList();
@@ -122,6 +123,24 @@ public class Game {
             System.out.println(sportsQuestions.removeFirst());
         if (currentCategory() == "Rock")
             System.out.println(rockQuestions.removeFirst());
+    }
+
+    public static void askQuestionPure(
+            String currentCategory,
+            LinkedList<String> popQuestions,
+            LinkedList<String> scienceQuestions,
+            LinkedList<String> sportsQuestions,
+            LinkedList<String> rockQuestions,
+            Consumer<Object> displayQuestion) {
+
+        if (currentCategory == "Pop")
+            displayQuestion.accept(popQuestions.removeFirst());
+        if (currentCategory == "Science")
+            displayQuestion.accept(scienceQuestions.removeFirst());
+        if (currentCategory == "Sports")
+            displayQuestion.accept(sportsQuestions.removeFirst());
+        if (currentCategory == "Rock")
+            displayQuestion.accept(rockQuestions.removeFirst());
     }
 
 
